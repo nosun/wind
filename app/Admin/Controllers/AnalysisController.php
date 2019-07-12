@@ -3,150 +3,15 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Forms\Analysis;
-use App\Models\VibrationData;
 use Encore\Admin\Layout\Content;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Http\Request;
-use Encore\Admin\Form;
 
 class AnalysisController
 {
-    public function showFrom(Content $content)
-    {
-
-
-        $fields = [
-            'span' => [
-                'label' => 'Span',
-                'type' => 'int',
-                'default' => 0
-            ],
-
-            'line_angle' => [
-                'label' => 'Line Angle',
-                'type' => 'float',
-                'default' => 0
-            ],
-
-            'wind_direction' => [
-                'label' => 'Wind Direction',
-                'type' => 'float',
-                'default' => 0
-            ],
-
-            'wind_speed' => [
-                'label' => 'Wind Speed',
-                'type' => 'float',
-                'default' => 0
-            ],
-
-            'humidity' => [
-                'label' => 'Humidity',
-                'type' => 'float',
-                'default' => 0
-            ],
-
-            'temperature' => [
-                'label' => 'Temperature',
-                'type' => 'float',
-                'default' => 0
-            ],
-
-
-            'precipitation' => [
-                'label' => 'Precipitation',
-                'type' => 'float',
-                'default' => 0
-            ],
-
-            'ice_thickness' => [
-                'label' => 'Ice Thickness',
-                'type' => 'float',
-                'default' => 0
-            ],
-
-            'angle' => [
-                'label' => 'Angle',
-                'type' => 'float',
-                'default' => 0
-            ],
-
-//            'number' => [
-//                'label' => 'Number',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-//
-//            'evid' => [
-//                'label' => 'Evid',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-//
-//            'province' => [
-//                'label' => 'Province',
-//                'type' => 'string',
-//                'default' => ''
-//            ],
-//
-//            'line_name' => [
-//                'label' => 'Line Name',
-//                'type' => 'string',
-//                'default' => ''
-//            ],
-//
-//            'clock' => [
-//                'label' => 'Clock',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-//
-//            'voltage' => [
-//                'label' => 'Voltage',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-//
-//            'gt_number' => [
-//                'label' => 'GT Number',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-//
-//            'voltage_type' => [
-//                'label' => 'Voltage Type',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-//
-//            'vertical_wind_speed' => [
-//                'label' => 'Vertical Wind Speed',
-//                'type' => 'float',
-//                'default' => 0
-//            ],
-//
-//            'podu' => [
-//                'label' => '坡度',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-//
-//            'pogao' => [
-//                'label' => '坡高',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-//
-//            'dimao' => [
-//                'label' => '地貌',
-//                'type' => 'int',
-//                'default' => 0
-//            ],
-        ];
-        return $content
-            ->header('智能分析')
-            ->view('admin::custom.wind-analysis-form', ['fields' => $fields]);
-    }
-
     public function showForm(Content $content)
     {
         return $content
@@ -156,7 +21,56 @@ class AnalysisController
 
     public function getResult(Request $request)
     {
-        dd($request);
+
+        $client = new Client();
+
+        $api = config('admin.analysis_api');
+
+        $post = $request->post();
+
+        unset($post['_form_']);
+        unset($post['_token']);
+
+        $postNew = (function ($post) {
+            $data = [];
+            foreach ($post as $key => $value) {
+                $key = ucfirst($this->camelize($key));
+                $data[$key] = $value;
+            }
+            return $data;
+        })($post);
+
+        try {
+
+            $response = $client->post($api, [
+                'form_params' => $postNew
+            ]);
+
+            if ($response->getStatusCode() == 200) {
+                admin_success((string)($response->getBody()));
+            } else {
+                admin_error("Api Error, Please Check");
+            }
+        } catch (ClientException $e) {
+            admin_error("Api Error, Please Check");
+        } catch (ConnectException $e) {
+            admin_error("Api Error, Please Check");
+        } catch (ServerException $e) {
+            admin_error("Api Error, Please Check");
+        }
+
+        return back();
+    }
+
+    protected function camelize($uncamelized_words, $separator = '_')
+    {
+        $uncamelized_words = $separator . str_replace($separator, " ", strtolower($uncamelized_words));
+        return ltrim(str_replace(" ", "", ucwords($uncamelized_words)), $separator);
+    }
+
+    protected function unCamelize($camelCaps, $separator = '_')
+    {
+        return strtolower(preg_replace('/([a-z])([A-Z])/', "$1" . $separator . "$2", $camelCaps));
     }
 }
 

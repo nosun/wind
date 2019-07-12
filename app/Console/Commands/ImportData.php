@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Imports\VibrationDataImport;
+use Doctrine\DBAL\Query\QueryException;
 use Illuminate\Console\Command;
 
 class ImportData extends Command
@@ -41,10 +42,23 @@ class ImportData extends Command
         $file = $this->argument('file');
 
         $this->info('begin import file of path ' . $file);
-
         $path = \Storage::disk('admin')->path($file);
+        $filename = $this->getFileName($file);
 
-        \Excel::import(new VibrationDataImport(), $path);
+        try {
+            \Excel::import(new VibrationDataImport($filename), $path);
+        } catch (QueryException $exception) {
+            var_dump($exception->getMessage());
+        }
+    }
 
+    protected function getFileName($file)
+    {
+        $_arr = explode('/', $file);
+        if(count($_arr)){
+            return last($_arr);
+        }
+
+        return '';
     }
 }

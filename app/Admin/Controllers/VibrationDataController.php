@@ -104,17 +104,17 @@ class VibrationDataController extends AdminController
         $grid->disableCreateButton();
         $grid->disableRowSelector();
 
-        $grid->tools(function ($tools) {
-            $tools->append('<div class="btn-group" style="margin-right: 5px">
-                <a href="' . route('admin.vibrationData.showMap') . '" class="btn btn-sm btn-warning" title="地理分布图">
-                    <i class="fa fa-map"></i><span class="hidden-xs"> 地理分布图 </span>
-                </a></div>');
-
-            $tools->append('<div class="btn-group" style="margin-right: 5px">
-                <a href="' . route('admin.vibrationData.importForm') . '" class="btn btn-sm btn-success" title="导入数据">
-                    <i class="fa fa-database"></i><span class="hidden-xs"> 导入数据 </span>
-                </a></div>');
-        });
+//        $grid->tools(function ($tools) {
+//            $tools->append('<div class="btn-group" style="margin-right: 5px">
+//                <a href="' . route('admin.vibrationData.showMap') . '" class="btn btn-sm btn-warning" title="地理分布图">
+//                    <i class="fa fa-map"></i><span class="hidden-xs"> 地理分布图 </span>
+//                </a></div>');
+//
+//            $tools->append('<div class="btn-group" style="margin-right: 5px">
+//                <a href="' . route('admin.vibrationData.importForm') . '" class="btn btn-sm btn-success" title="导入数据">
+//                    <i class="fa fa-database"></i><span class="hidden-xs"> 导入数据 </span>
+//                </a></div>');
+//        });
 
 //        $grid->header(function ($query) {
 //

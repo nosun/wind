@@ -41,8 +41,8 @@ class ImportWikiData extends Command
     public function handle()
     {
         $this->info('import Wiki Data Begin');
-
         $data = WikiCategory::query()->select(['id', 'name', 'slug'])->get()->toArray();
+
         $categories = [];
         foreach ($data as $row) {
             $categories[$row['slug']] = $row;

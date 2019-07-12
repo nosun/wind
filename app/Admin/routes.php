@@ -18,6 +18,6 @@ Route::group([
     $router->post('importData','VibrationDataController@import')->name('admin.vibrationData.import');
     $router->get('dataMap','VibrationDataController@showMap')->name('admin.vibrationData.showMap');
     $router->get('smartAnalysis','AnalysisController@showForm')->name('admin.analysis.form');
-    $router->post('smartAnalysis','SmartAnalysisController@getResult')->name('admin.analysis.getResult');
+    $router->post('smartAnalysis','AnalysisController@getResult')->name('admin.handle-form');
 
 });
