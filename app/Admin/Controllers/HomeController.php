@@ -12,7 +12,8 @@ class HomeController extends Controller
 
     public function index(Content $content)
     {
-        $data = VibrationData::query()->groupBy('province')
+        $data = VibrationData::query()->whereIn('batch',[2,3])
+            ->groupBy('province')
             ->selectRaw("province as name,count(id) as value")->get()->toJson();
 
         return $content

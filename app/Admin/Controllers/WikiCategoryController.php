@@ -53,10 +53,12 @@ class WikiCategoryController extends AdminController
 
     public function myDetail($id){
         $category = WikiCategory::findOrFail($id);
+
         $docs = WikiDoc::query()->where('category_id',$id)->where('type','doc')
             ->orderBy('weight','desc')
             ->orderBy('id','desc')
             ->get();
+
         $videos = WikiDoc::query()->where('category_id',$id)->where('type','video')
             ->orderBy('weight','desc')
             ->orderBy('id','desc')
@@ -106,8 +108,8 @@ class WikiCategoryController extends AdminController
         $form = new Form(new WikiCategory);
 
         $form->text('name', __('Name'));
-        $form->text('slug', __('Slug'));
-
+        $form->UEditor('definition', __('Definition'));
+        $form->UEditor('theory', __('Theory'));
         return $form;
     }
 }

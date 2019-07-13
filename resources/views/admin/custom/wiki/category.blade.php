@@ -10,13 +10,57 @@
     <div class="col-md-12">
         <!-- The time line -->
         <ul class="timeline">
+        @if(!empty($category->definition))
+            <!-- timeline time label -->
+                {{--<li class="time-label">--}}
+                  {{--<span class="bg-green">--}}
+                    {{--定义--}}
+                  {{--</span>--}}
+                {{--</li>--}}
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <li>
+                    <i class="fa fa-leaf bg-blue"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header">{{ $category->name }}  定义</h3>
+                        <div class="timeline-body">
+                            {!! $category->definition !!}
+                        </div>
+                    </div>
+                </li>
+                <!-- END timeline item -->
+        @endif
+
+        @if(!empty($category->theory))
+            <!-- timeline time label -->
+                {{--<li class="time-label">--}}
+                  {{--<span class="bg-green">--}}
+                    {{--原理--}}
+                  {{--</span>--}}
+                {{--</li>--}}
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <li>
+                    <i class="fa fa-puzzle-piece bg-yellow"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header">{{ $category->name }}  原理</h3>
+                        <div class="timeline-body">
+                            {!! $category->theory !!}
+                        </div>
+                    </div>
+                </li>
+                <!-- END timeline item -->
+        @endif
+
+
+
         @if(count($images)> 0)
             <!-- timeline time label -->
-                <li class="time-label">
-                  <span class="bg-green">
-                    图片
-                  </span>
-                </li>
+                {{--<li class="time-label">--}}
+                  {{--<span class="bg-green">--}}
+                    {{--图片--}}
+                  {{--</span>--}}
+                {{--</li>--}}
                 <!-- /.timeline-label -->
                 <!-- timeline item -->
                 <li>
@@ -41,11 +85,11 @@
             @endif
 
             @if(count($videos) > 0)
-                <li class="time-label">
-                  <span class="bg-green">
-                    视频
-                  </span>
-                </li>
+                {{--<li class="time-label">--}}
+                  {{--<span class="bg-green">--}}
+                    {{--视频--}}
+                  {{--</span>--}}
+                {{--</li>--}}
                 <!-- timeline item -->
                 <li>
                     <i class="fa fa-video-camera bg-maroon"></i>
@@ -62,11 +106,11 @@
             @endif
 
             @if(count($docs)> 0)
-                <li class="time-label">
-                  <span class="bg-green">
-                    文档
-                  </span>
-                </li>
+                {{--<li class="time-label">--}}
+                  {{--<span class="bg-green">--}}
+                    {{--文档--}}
+                  {{--</span>--}}
+                {{--</li>--}}
 
                 <li>
                     <i class="fa fa-file-pdf-o bg-blue"></i>
