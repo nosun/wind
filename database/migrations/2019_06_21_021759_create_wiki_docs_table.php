@@ -22,6 +22,8 @@ class CreateWikiDocsTable extends Migration
             $table->float('size')->comment('文件大小')->default(0);
             $table->string('ext', 32)->comment('文件后缀')->default('');
             $table->tinyInteger('weight')->comment('推荐级别')->default(0);
+            $table->string('md5',255)->comment('hash');
+            $table->string('author',255)->comment('作者')->default('');
             $table->timestamps();
         });
     }

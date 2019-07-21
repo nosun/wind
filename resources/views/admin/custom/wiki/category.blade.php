@@ -139,7 +139,7 @@
                                             <td>
                                                 <a href="{{ $doc->link() }}" target="_blank" title="查看"><i
                                                             class="fa fa-eye"></i></a>
-                                                <a href="{{ $doc->link() }}" target="_blank" download="{{$doc->link()}}" title="下载"><i class="fa fa-download"></i></a>
+                                                <a href="{{ $doc->link() }}" target="_blank" download="{{ $doc->title }}" title="下载"><i class="fa fa-download"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach()

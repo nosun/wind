@@ -8,6 +8,8 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Layout\Content;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class VibrationDataController extends AdminController
 {
@@ -211,11 +213,33 @@ class VibrationDataController extends AdminController
         return $form;
     }
 
-    public function showMap(Content $content)
+    public function showMap(Content $content, Request $request)
     {
 
-        $data = VibrationData::query()->groupBy('province')
-            ->selectRaw("province as name,count(id) as value")->get()->toJson();
+        // for sql query
+        $start = $this->getMiniMonth();
+        $end = Carbon::parse(time())->format('Ym');
+
+        // for show
+        $start_1 =  Carbon::parse($start.'01')->format('m/d/Y');
+        $end_1 = Carbon::parse(time())->format('m/d/Y');
+        $date_range = $start_1 . ' - ' . $end_1;
+
+        if ($request->method() == 'POST') {
+            $date_range = $request->post('date_range');
+            if ($date_range) {
+                $_arr = explode(' - ', $date_range);
+                if (count($_arr) == 2) {
+                    $start = Carbon::parse($_arr[0])->format('Ym');
+                    $end = Carbon::parse($_arr[1])->format('Ym');
+                }
+            }
+        }
+
+        $data1 = $this->getFengZhenData(1, $start, $end);
+        $data2 = $this->getFengZhenData(2, $start, $end);
+        $data3 = $this->getFengZhenData(3, $start, $end);
+        $data4 = $this->getFengZhenData(4, $start, $end);
 
         return $content
             ->header('风振数据分布图')
@@ -223,7 +247,13 @@ class VibrationDataController extends AdminController
             ->breadcrumb(
                 ['text' => '风振数据', 'url' => route('admin.vibrationData.index')],
                 ['text' => '分布图']
-            )->view('admin::custom.vibration-data-map', ['data' => $data]);
+            )->view('admin::custom.vibration-data-map',[
+                'data1' => $data1,
+                'data2' => $data2,
+                'data3' => $data3,
+                'data4' => $data4,
+                'date_range' => $date_range
+                ]);
     }
 
     public function importForm(Content $content)
@@ -235,5 +265,29 @@ class VibrationDataController extends AdminController
                 ['text' => '风振数据', 'url' => route('admin.vibrationData.index')],
                 ['text' => '批量上传']
             )->view('admin::custom.vibration-data-form', []);
+    }
+
+    protected function getMiniMonth()
+    {
+        $result = VibrationData::query()->whereIn('batch', [2, 3])
+            ->selectRaw("MIN(time) as time")->first();
+        return $result->time;
+    }
+
+    protected function getFengZhenData($level, $start, $end)
+    {
+        $query = VibrationData::query()->whereIn('batch', [2, 3]);
+
+        if ($start) {
+            $query = $query->where('time', '>', $start);
+        }
+
+        if ($end) {
+            $query = $query->where('time', '<', $end);
+        }
+
+        return $query->where('fengzhen', $level)
+            ->groupBy('province')
+            ->selectRaw("province as name,count(id) as value")->get()->toJson();
     }
 }

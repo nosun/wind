@@ -10,7 +10,7 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
-    $router->get('/', 'HomeController@index')->name('admin.home');
+    $router->any('/', 'HomeController@index')->name('admin.home');
     $router->resource('wiki', 'WikiDocController')->names('admin.wiki');
     $router->resource('wikicategory', 'WikiCategoryController')->names('admin.wikiCategory');
     $router->resource('vibrationData', 'VibrationDataController')->names('admin.vibrationData');

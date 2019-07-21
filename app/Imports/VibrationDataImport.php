@@ -71,7 +71,11 @@ class VibrationDataImport implements ToModel, WithBatchInserts, WithChunkReading
 
     protected function transferTime($time)
     {
-        $_arr = explode('.', $time);
+        if(strstr($time,'_')){
+            $_arr = explode('_', $time);
+        }else{
+            $_arr = explode('.', $time);
+        }
 
         if ($_arr) {
             $month = $_arr[1];
