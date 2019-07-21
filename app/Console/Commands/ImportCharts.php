@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\AnalysisChart;
+use App\Models\ChartsCategory;
 use Illuminate\Console\Command;
 use Storage;
 
@@ -66,24 +67,25 @@ class ImportCharts extends Command
         $_arr = explode('/', $dir);
         $length = count($_arr);
 
-        $title = $_arr[$length - 1];
-        $number = '';
+        $depth = $length - 2;
 
+        $category = ChartsCategory::query()->firstOrCreate([
+            'category_1' => $_arr[1],
+            'category_2' => $depth >=2 ? $_arr[2] : '',
+        ]);
+
+        $title = $_arr[$length - 1];
         $_arr_1 = explode(' ', $title);
 
         if (count($_arr_1) == 2) {
-            $number = $_arr_1[0];
             $title = $_arr_1[1];
         }
 
         $chart = AnalysisChart::query()->firstOrCreate(['title' => $title]);
 
-        $chart->number = $number;
         $chart->title = $title;
-
-        for ($i = 1; $i < $length - 1; $i++) {
-            $chart->{'category_' . $i} = $_arr[$i];
-        }
+        $chart->category_id = $category->id;
+        $chart->category = $depth >=3 ? $_arr[3] : '';
 
         $files = Storage::disk('admin')->listContents($dir);
 
@@ -97,13 +99,10 @@ class ImportCharts extends Command
                 case 'png':
                 case 'jpeg':
                 case 'jpg':
-                case 'csv':
-                    $chart->type = $file['extension'];
                     $md5 = md5_file(Storage::disk('admin')->path($file['path']));
-                    $new_path = public_path() . '/uploads/charts/'. md5($file['basename']) . '.' . $file['extension'];
-                    copy(Storage::disk('admin')->path($file['path']),$new_path);
+                    $new_path = '/uploads/charts/'. md5($file['basename']) . '.' . $file['extension'];
+                    copy(Storage::disk('admin')->path($file['path']),public_path() .$new_path);
                     $chart->path = $new_path;
-                    $chart->ext = $file['extension'];
                     $chart->md5 = $md5;
                     $chart->save();
                     $this->info('success import chart: ' . $file['basename']);
