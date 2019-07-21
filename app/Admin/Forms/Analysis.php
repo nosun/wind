@@ -35,23 +35,23 @@ class Analysis extends Form
      */
     public function form()
     {
-        $this->number('span', 'Span')->default(344)
+        $this->number('span', __('Span'))->default(344)
             ->rules('required');
-        $this->decimal('line_angle', 'Line Angle')->default(292.6)
+        $this->decimal('line_angle', __('Line Angle'))->default(292.6)
             ->rules('required');
-        $this->decimal('wind_direction', 'Wind Direction')->default(26.58)
+        $this->decimal('wind_direction', __('Wind Direction'))->default(26.58)
             ->rules('required');
-        $this->decimal('wind_speed', 'Wind Speed')->default(4.54)
+        $this->decimal('wind_speed', __('Wind Speed'))->default(4.54)
             ->rules('required');
-        $this->decimal('humidity', 'Humidity')->default(87.55)
+        $this->decimal('humidity', __('Humidity'))->default(87.55)
             ->rules('required');
-        $this->decimal('temperature', 'Temperature')->default(-2.47)
+        $this->decimal('temperature', __('Temperature'))->default(-2.47)
             ->rules('required');
-        $this->decimal('precipitation', 'Precipitation')->default(0.01)
+        $this->decimal('precipitation', __('Precipitation'))->default(0.01)
             ->rules('required');
-        $this->decimal('ice_thickness', 'Ice Thickness')->default(0.012944)
+        $this->decimal('ice_thickness', __('Ice Thickness'))->default(0.012944)
             ->rules('required');
-        $this->decimal('angle', 'Angle')->default(86.02)
+        $this->decimal('angle', __('Angle'))->default(86.02)
             ->rules('required');
     }
 

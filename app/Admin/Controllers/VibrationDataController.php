@@ -30,15 +30,27 @@ class VibrationDataController extends AdminController
         $grid = new Grid(new VibrationData);
 
         $grid->column('span', __('Span'));
-        $grid->column('line_angle', __('Line angle'));
-        $grid->column('wind_direction', __('Wind direction'));
-        $grid->column('wind_speed', __('Wind speed'));
+        $grid->column('line_angle', __('Line Angle'));
+        $grid->column('wind_direction', __('Wind Direction'));
+        $grid->column('wind_speed', __('Wind Speed'));
         $grid->column('humidity', __('Humidity'));
         $grid->column('temperature', __('Temperature'));
         $grid->column('angle', __('Angle'));
         $grid->column('precipitation', __('Precipitation'));
-        $grid->column('ice_thickness', __('Ice thickness'));
-        $grid->column('wudong', __('Wudong'));
+        $grid->column('ice_thickness', __('Ice Thickness'));
+        $grid->column('province', __('Province'));
+        $grid->column('line_name', __('Line Name'));
+        $grid->column('voltage', __('Voltage'));
+        $grid->column('gt_number', __('Gt Number'));
+        $grid->column('voltage_type', __('Voltage Type'));
+        $grid->column('vertical_wind_speed', __('Vertical Wind Speed'));
+        $grid->column('podu', __('Podu'));
+        $grid->column('pogao', __('Pogao'));
+        $grid->column('dimao', __('Dimao'));
+        $grid->column('tiaozha', __('Tiaozha'));
+        $grid->column('pohuai', __('Pohuai'));
+        $grid->column('fengzhen', __('Fengzhen'));
+        $grid->column('batch', __('Batch'));
 
         $grid->filter(function ($filter) {
             // 去掉默认的id过滤器
@@ -46,26 +58,27 @@ class VibrationDataController extends AdminController
 
             $filter->column(1 / 2, function ($filter) {
 
-                $filter->between('span', 'span');
-                $filter->between('line_angle', 'Line Angle');
-                $filter->between('wind_speed', 'Wind Speed');
-                $filter->between('humidity', 'Humidity');
-                $filter->between('temperature', 'Temperature');
-                $filter->between('precipitation', 'Precipitation');
-                $filter->between('ice_thickness', 'IceThickness');
-                $filter->between('angle', 'Angle');
+                $filter->between('span', __('Span'));
+                $filter->between('line_angle', __('Line Angle'));
+                $filter->between('wind_speed', __('Wind Speed'));
+                $filter->between('humidity', __('Humidity'));
+                $filter->between('temperature', __('Temperature'));
+                $filter->between('precipitation', __('Precipitation'));
+                $filter->between('ice_thickness', __('Ice Thickness'));
+                $filter->between('angle', __('Angle'));
 
             });
 
             $filter->column(1 / 3, function ($filter) {
-                $filter->like('province', '省份');
-                $filter->like('line_name', 'Line Name');
-                $filter->in('tianzha')->radio([
+                $filter->like('batch', __('Batch'));
+                $filter->like('province', __('Province'));
+                $filter->like('line_name', __('Line Name'));
+                $filter->in('tiaozha',__('Tiaozha'))->radio([
                     0 => 0,
                     1 => 1,
                 ]);
 
-                $filter->equal('pohuai')->select([
+                $filter->equal('pohuai',__('Pohuai'))->select([
                     0 => 0,
                     1 => 1,
                     2 => 2,
@@ -73,7 +86,7 @@ class VibrationDataController extends AdminController
                     4 => 4,
                 ]);
 
-                $filter->equal('wudong')->select(
+                $filter->equal('fengzhen',__('Fengzhen'))->select(
                     [
                         0 => '无异常',
                         1 => '舞动',
@@ -84,23 +97,6 @@ class VibrationDataController extends AdminController
                 );
             });
         });
-
-//        $grid->column('number', __('Number'));
-//        $grid->column('evid', __('Evid'));
-//        $grid->column('province', __('Province'));
-//        $grid->column('line_name', __('Line name'));
-//        $grid->column('clock', __('Clock'));
-//        $grid->column('voltage', __('Voltage'));
-//        $grid->column('gt_number', __('Gt number'));
-//        $grid->column('voltage_type', __('Voltage type'));
-//        $grid->column('vertical_wind_speed', __('Vertical wind speed'));
-//        $grid->column('podu', __('Podu'));
-//        $grid->column('pogao', __('Pogao'));
-//        $grid->column('dimao', __('Dimao'));
-//        $grid->column('tiaoczha', __('Tiaoczha'));
-//        $grid->column('pohuai', __('Pohuai'));
-//        $grid->column('created_at', __('Created at'));
-//        $grid->column('updated_at', __('Updated at'));
 
         $grid->disableActions();
         $grid->disableCreateButton();
@@ -155,15 +151,15 @@ class VibrationDataController extends AdminController
         $show->field('gt_number', __('Gt number'));
         $show->field('voltage_type', __('Voltage type'));
         $show->field('span', __('Span'));
-        $show->field('line_angle', __('Line angle'));
-        $show->field('wind_direction', __('Wind direction'));
-        $show->field('wind_speed', __('Wind speed'));
+        $show->field('line_angle', __('Line Angle'));
+        $show->field('wind_direction', __('Wind Direction'));
+        $show->field('wind_speed', __('Wind Speed'));
         $show->field('humidity', __('Humidity'));
         $show->field('temperature', __('Temperature'));
         $show->field('precipitation', __('Precipitation'));
-        $show->field('ice_thickness', __('Ice thickness'));
+        $show->field('ice_thickness', __('Ice Thickness'));
         $show->field('angle', __('Angle'));
-        $show->field('vertical_wind_speed', __('Vertical wind speed'));
+        $show->field('vertical_wind_speed', __('Vertical Wind Speed'));
         $show->field('podu', __('Podu'));
         $show->field('pogao', __('Pogao'));
         $show->field('dimao', __('Dimao'));
@@ -188,26 +184,26 @@ class VibrationDataController extends AdminController
         $form->number('number', __('Number'));
         $form->number('evid', __('Evid'));
         $form->text('province', __('Province'));
-        $form->text('line_name', __('Line name'));
+        $form->text('line_name', __('Line Name'));
         $form->number('clock', __('Clock'));
         $form->number('voltage', __('Voltage'));
-        $form->number('gt_number', __('Gt number'));
-        $form->number('voltage_type', __('Voltage type'));
+        $form->number('gt_number', __('Gt Number'));
+        $form->number('voltage_type', __('Voltage Type'));
         $form->number('span', __('Span'));
-        $form->decimal('line_angle', __('Line angle'));
-        $form->decimal('wind_direction', __('Wind direction'));
-        $form->decimal('wind_speed', __('Wind speed'));
+        $form->decimal('line_angle', __('Line Angle'));
+        $form->decimal('wind_direction', __('Wind Direction'));
+        $form->decimal('wind_speed', __('Wind Speed'));
         $form->text('humidity', __('Humidity'));
         $form->decimal('temperature', __('Temperature'));
         $form->decimal('precipitation', __('Precipitation'));
-        $form->decimal('ice_thickness', __('Ice thickness'));
+        $form->decimal('ice_thickness', __('Ice Thickness'));
         $form->decimal('angle', __('Angle'));
-        $form->decimal('vertical_wind_speed', __('Vertical wind speed'));
+        $form->decimal('vertical_wind_speed', __('Vertical Wind Speed'));
         $form->number('podu', __('Podu'));
         $form->number('pogao', __('Pogao'));
         $form->number('dimao', __('Dimao'));
         $form->number('wudong', __('Wudong'));
-        $form->number('tiaoczha', __('Tiaoczha'));
+        $form->number('tiaozha', __('tiaozha'));
         $form->number('pohuai', __('Pohuai'));
 
         return $form;

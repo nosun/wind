@@ -31,7 +31,6 @@ class ChartsCategoryController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('category_1', __('Category 1'));
         $grid->column('category_2', __('Category 2'));
-        $grid->column('category_3', __('Category 3'));
         $grid->column('weight', __('Weight'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -93,7 +92,6 @@ class ChartsCategoryController extends AdminController
         $show->field('id', __('Id'));
         $show->field('category_1', __('Category 1'));
         $show->field('category_2', __('Category 2'));
-        $show->field('category_3', __('Category 3'));
         $show->field('weight', __('Weight'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -112,7 +110,6 @@ class ChartsCategoryController extends AdminController
 
         $form->text('category_1', __('Category 1'));
         $form->text('category_2', __('Category 2'));
-        $form->text('category_3', __('Category 3'));
         $form->switch('weight', __('Weight'));
 
         return $form;

@@ -1,5 +1,27 @@
 {
   "Name": "名称",
   "Definition": "定义",
-  "Theory": "理论"
+  "Theory": "理论",
+  "Province": "省份",
+  "Line Name": "线路名称",
+  "Span": "档距",
+  "Line Angle": "线路走向角",
+  "Wind Speed": "风速",
+  "Humidity": "湿度",
+  "Temperature": "温度",
+  "Precipitation": "降水量",
+  "Ice Thickness": "覆冰厚度",
+  "Angle": "风线夹角",
+  "Fengzhen": "风振",
+  "Tiaozha": "跳闸",
+  "Pohuai": "破坏等级",
+  "Voltage": "电压等级",
+  "Gt Number": "杆塔编号",
+  "Voltage Type": "电压类型 ",
+  "Wind Direction": "风向",
+  "Vertical Wind Speed": "垂直风速",
+  "Podu": "坡度",
+  "Pogao": "坡高",
+  "Dimao": "地貌",
+  "Batch": "批次"
 }
