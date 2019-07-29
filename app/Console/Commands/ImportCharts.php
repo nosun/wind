@@ -75,11 +75,6 @@ class ImportCharts extends Command
         ]);
 
         $title = $_arr[$length - 1];
-        $_arr_1 = explode(' ', $title);
-
-        if (count($_arr_1) == 2) {
-            $title = $_arr_1[1];
-        }
 
         $chart = AnalysisChart::query()->firstOrCreate(['title' => $title]);
 

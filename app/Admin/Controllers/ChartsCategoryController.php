@@ -42,13 +42,14 @@ class ChartsCategoryController extends AdminController
     public function show($id, Content $content)
     {
         $category = ChartsCategory::findOrFail($id);
+        $name  = !empty($category->category_2) ? $category->category_2 : $category->category_1;
 
         return $content
             ->header('分析图表')
-            ->description($category->name)
+            ->description($name)
             ->breadcrumb(
                 ['text' => '分析图表展示'],
-                ['text' => !empty($category->category_3) ? $category->category_3 : $category->category_2]
+                ['text' => $name]
             )
             ->body($this->myDetail($id));
     }
@@ -56,7 +57,11 @@ class ChartsCategoryController extends AdminController
     public function myDetail($id){
         $category = ChartsCategory::findOrFail($id);
 
-        $charts = AnalysisChart::query()->where('category_id', $category->id)->get();
+        $charts = AnalysisChart::query()
+            ->where('category_id', $category->id)
+            ->orderBy('weight','desc')
+            ->orderBy('id','asc')
+            ->get();
         $charts = $this->formatCharts($charts);
 
         return view('admin::custom.charts.category')

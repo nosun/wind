@@ -35,13 +35,13 @@ class Analysis extends Form
      */
     public function form()
     {
-        $this->number('span', __('Span'))->default(344)
+        $this->decimal('span', __('Span'))->default(344)
             ->rules('required');
         $this->decimal('line_angle', __('Line Angle'))->default(292.6)
             ->rules('required');
-        $this->decimal('wind_direction', __('Wind Direction'))->default(26.58)
+        $this->decimal('wind_speed', __('Wind Speed'))->default(26.58)
             ->rules('required');
-        $this->decimal('wind_speed', __('Wind Speed'))->default(4.54)
+        $this->decimal('wind_direction', __('Wind Direction'))->default(4.54)
             ->rules('required');
         $this->decimal('humidity', __('Humidity'))->default(87.55)
             ->rules('required');
@@ -62,8 +62,6 @@ class Analysis extends Form
      */
     public function data()
     {
-        return [
-            'span' => 10
-        ];
+        return [];
     }
 }

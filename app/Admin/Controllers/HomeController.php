@@ -13,8 +13,18 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    public function index(Content $content){
+    public function index(Content $content)
+    {
         return redirect('/dataMap');
+    }
+
+    public function readme(Content $content)
+    {
+        $doc = file_get_contents(public_path() . '/wiki/readme.md');
+
+        return $content
+            ->header('使用说明')
+            ->view('admin.custom.readme', ['doc' => $doc]);
     }
 
     public function index1(Content $content, Request $request)
@@ -25,7 +35,7 @@ class HomeController extends Controller
         $end = Carbon::parse(time())->format('Ym');
 
         // for show
-        $start_1 =  Carbon::parse($start.'01')->format('m/d/Y');
+        $start_1 = Carbon::parse($start . '01')->format('m/d/Y');
         $end_1 = Carbon::parse(time())->format('m/d/Y');
         $date_range = $start_1 . ' - ' . $end_1;
 
@@ -47,8 +57,8 @@ class HomeController extends Controller
 
         $charts = AnalysisChart::query()->select(
             [
-                'category_1','category_2','category_3','category_4',
-                'type','number','title','path','description'
+                'category_1', 'category_2', 'category_3', 'category_4',
+                'type', 'number', 'title', 'path', 'description'
             ]
         )->get();
 
@@ -68,16 +78,17 @@ class HomeController extends Controller
             ]);
     }
 
-    protected function formatCharts($charts){
+    protected function formatCharts($charts)
+    {
         $_arr = [];
-        foreach($charts as $chart){
-            if($chart['category_4']){
+        foreach ($charts as $chart) {
+            if ($chart['category_4']) {
                 $_arr[$chart['category_1']][$chart['category_2']][$chart['category_3']][$chart['category_4']][] = $chart;
-            }else{
-                if($chart['category_3']){
+            } else {
+                if ($chart['category_3']) {
                     $_arr[$chart['category_1']][$chart['category_2']][$chart['category_3']][] = $chart;
-                }else{
-                    if($chart['category_2']){
+                } else {
+                    if ($chart['category_2']) {
                         $_arr[$chart['category_1']][$chart['category_2']][] = $chart;
                     }
                 }

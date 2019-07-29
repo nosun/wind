@@ -11,6 +11,7 @@ Route::group([
 ], function (Router $router) {
 
     $router->any('/', 'HomeController@index')->name('admin.home');
+    $router->get('/page/readme', "HomeController@readme")->name('admin.readme');
     $router->resource('wiki', 'WikiDocController')->names('admin.wiki');
     $router->resource('wikicategory', 'WikiCategoryController')->names('admin.wikiCategory');
     $router->resource('vibrationData', 'VibrationDataController')->names('admin.vibrationData');
@@ -20,5 +21,4 @@ Route::group([
     $router->get('dataMap','VibrationDataController@showMap')->name('admin.vibrationData.showMap');
     $router->get('smartAnalysis','AnalysisController@showForm')->name('admin.analysis.form');
     $router->post('smartAnalysis','AnalysisController@getResult')->name('admin.handle-form');
-
 });

@@ -35,10 +35,11 @@ class AnalysisController
             $data = [];
             foreach ($post as $key => $value) {
                 $key = ucfirst($this->camelize($key));
-                $data[$key] = $value;
+                $data[$key] = (float)$value;
             }
             return $data;
         })($post);
+
 
         try {
 
