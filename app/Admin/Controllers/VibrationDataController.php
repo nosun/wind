@@ -252,6 +252,15 @@ class VibrationDataController extends AdminController
                 ]);
     }
 
+    public function showMapDemo(Content $content)
+    {
+        return $content
+            ->header('风振数据分布图')
+            ->description('各省上传数据分布')
+            ->breadcrumb(['text' => '分布图'])
+            ->view('admin::custom.vibration-data-map-back',[]);
+    }
+
     public function importForm(Content $content)
     {
         return $content
