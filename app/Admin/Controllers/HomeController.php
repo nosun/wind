@@ -23,7 +23,7 @@ class HomeController extends Controller
         $doc = file_get_contents(public_path() . '/wiki/readme.md');
 
         return $content
-            ->header('使用说明')
+            ->header('项目文档')
             ->view('admin.custom.readme', ['doc' => $doc]);
     }
 

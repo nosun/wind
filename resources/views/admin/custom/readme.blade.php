@@ -3,16 +3,32 @@
         .markdown{
             padding: 10px;
         }
+
         .markdown h2{
-            font-size: 24px;
+            font-size: 20px;
+            line-height:36px;
+            margin:20px auto 10px;
         }
 
         .markdown h3 {
-            font-size: 20px;
+            font-size: 18px;
+            line-height:32px;
+            margin:10px auto;
         }
 
         .markdown h4 {
             font-size:16px;
+        }
+
+        .markdown p{
+            font-size:16px;
+            line-height:28px;
+            text-indent:2em;
+        }
+
+        .markdown li{
+            font-size:16px;
+            line-height:28px;
         }
     </style>
     <!-- Main row -->

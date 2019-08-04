@@ -44,9 +44,11 @@ class ImportData extends Command
         $this->info('begin import file of path ' . $file);
         $path = \Storage::disk('admin')->path($file);
         $filename = $this->getFileName($file);
+        $dist = 'finished/' . $filename;
 
         try {
             \Excel::import(new VibrationDataImport($filename), $path);
+            \Storage::disk('admin')->move($file, $dist);
         } catch (QueryException $exception) {
             var_dump($exception->getMessage());
         }
@@ -55,7 +57,7 @@ class ImportData extends Command
     protected function getFileName($file)
     {
         $_arr = explode('/', $file);
-        if(count($_arr)){
+        if (count($_arr)) {
             return last($_arr);
         }
 
