@@ -10,6 +10,8 @@ use Encore\Admin\Show;
 use Encore\Admin\Layout\Content;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Encore\Admin\Widgets\Box;
+use View;
 
 class VibrationDataController extends AdminController
 {
@@ -19,6 +21,29 @@ class VibrationDataController extends AdminController
      * @var string
      */
     protected $title = '风振数据';
+
+    /**
+     * Index interface.
+     *
+     * @param Content $content
+     *
+     * @return Content
+     */
+    public function index(Content $content)
+    {
+
+        $info = View::make('admin.custom.parts.filter-info');
+
+        $box = new Box('筛选项取值范围', $info);
+        $box->style('primary');
+        $box->collapsable();
+        $box->solid();
+
+        return $content
+            ->title($this->title())
+            ->body($box)
+            ->body($this->grid());
+    }
 
     /**
      * Make a grid builder.
@@ -56,7 +81,7 @@ class VibrationDataController extends AdminController
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
 
-            $filter->column(1 / 2, function ($filter) {
+            $filter->column(2 / 3, function ($filter) {
 
                 $filter->between('span', __('Span'));
                 $filter->between('line_angle', __('Line Angle'));
@@ -70,15 +95,24 @@ class VibrationDataController extends AdminController
             });
 
             $filter->column(1 / 3, function ($filter) {
+                $provinces = config('app.provinces');
+                $province_options = (function ($provinces){
+                    $options = [];
+                    foreach($provinces as $province){
+                        $options[$province] = $province;
+                    }
+                    return $options;
+                })($provinces);
+
                 $filter->like('batch', __('Batch'));
-                $filter->like('province', __('Province'));
+                $filter->equal('province', __('Province'))->select($province_options);
                 $filter->like('line_name', __('Line Name'));
-                $filter->in('tiaozha',__('Tiaozha'))->radio([
+                $filter->in('tiaozha', __('Tiaozha'))->radio([
                     0 => 0,
                     1 => 1,
                 ]);
 
-                $filter->equal('pohuai',__('Pohuai'))->select([
+                $filter->equal('pohuai', __('Pohuai'))->select([
                     0 => 0,
                     1 => 1,
                     2 => 2,
@@ -86,7 +120,7 @@ class VibrationDataController extends AdminController
                     4 => 4,
                 ]);
 
-                $filter->equal('fengzhen',__('Fengzhen'))->select(
+                $filter->equal('fengzhen', __('Fengzhen'))->select(
                     [
                         0 => '无异常',
                         1 => '舞动',
@@ -217,7 +251,7 @@ class VibrationDataController extends AdminController
         $end = Carbon::parse(time())->format('Ym');
 
         // for show
-        $start_1 =  Carbon::parse($start.'01')->format('m/d/Y');
+        $start_1 = Carbon::parse($start . '01')->format('m/d/Y');
         $end_1 = Carbon::parse(time())->format('m/d/Y');
         $date_range = $start_1 . ' - ' . $end_1;
 
@@ -243,13 +277,13 @@ class VibrationDataController extends AdminController
             ->breadcrumb(
                 ['text' => '风振数据', 'url' => route('admin.vibrationData.index')],
                 ['text' => '分布图']
-            )->view('admin::custom.vibration-data-map',[
+            )->view('admin::custom.vibration-data-map', [
                 'data1' => $data1,
                 'data2' => $data2,
                 'data3' => $data3,
                 'data4' => $data4,
                 'date_range' => $date_range
-                ]);
+            ]);
     }
 
     public function showMapDemo(Content $content)
@@ -258,7 +292,7 @@ class VibrationDataController extends AdminController
             ->header('风振数据分布图')
             ->description('各省上传数据分布')
             ->breadcrumb(['text' => '分布图'])
-            ->view('admin::custom.vibration-data-map-back',[]);
+            ->view('admin::custom.vibration-data-map-back', []);
     }
 
     public function importForm(Content $content)

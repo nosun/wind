@@ -12,4 +12,8 @@ class VibrationData extends Model
         'precipitation', 'ice_thickness', 'angle', 'vertical_wind_speed', 'podu', 'pogao', 'dimao', 'fengzhen',
         'tiaozha', 'pohuai', 'key', 'time', 'batch','filename'
     ];
+
+    public function getProvinces(){
+        return $this->newQuery()->selectRaw("distinct(province)")->pluck('province')->toArray();
+    }
 }
