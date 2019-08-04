@@ -61,19 +61,19 @@ class VibrationDataImport implements ToModel, WithBatchInserts, WithChunkReading
             'batch' => $row['pici'] ?? 0,
 
             // new added
-            'altitude' => $row['altitude'] ?? 0,
-            'longitude' => $row['longitude'] ?? 0,
-            'line_type' => $row['line_type'] ?? '',
-            'split_number' => $row['split_number'] ?? 0,
-            'split_span' => $row['split_span'] ?? 0,
-            'max_span' => $row['max_span'] ?? 0,
-            'insulator_type' => $row['insulator_type'] ?? '',
-            'shock_device' => $row['shock_device'] ?? 0,
-            'reversed_a' => $row['reversed_a'] ?? 0,
-            'reversed_b' => $row['reversed_b'] ?? 0,
-            'reversed_c' => $row['reversed_c'] ?? "",
-            'reversed_d' => $row['reversed_d'] ?? "",
-            'reversed_e' => $row['reversed_e'] ?? "",
+            'altitude' => isset($row['altitude']) ? $row['altitude'] : 0,
+            'longitude' => isset($row['longitude']) ? $row['longitude'] : 0,
+            'line_type' => isset($row['line_type']) ? $row['line_type'] : null,
+            'split_number' => isset($row['split_number']) ? $row['split_number'] : 0,
+            'split_span' => isset($row['split_span']) ? $row['split_span'] : 0,
+            'max_span' => isset($row['max_span']) ? $row['max_span'] : 0,
+            'insulator_type' => isset($row['insulator_type']) ? $row['insulator_type'] : null,
+            'shock_device' => isset($row['shock_device']) ? $row['shock_device'] : 0,
+            'reserved_a' => isset($row['reserved_a']) ? $row['reserved_a'] : 0,
+            'reserved_b' => isset($row['reserved_b']) ? $row['reserved_b'] : 0,
+            'reserved_c' => isset($row['reserved_c']) ? $row['reserved_c'] : null,
+            'reserved_d' => isset($row['reserved_d']) ? $row['reserved_d'] : null,
+            'reserved_e' => isset($row['reserved_e']) ? $row['reserved_e'] : null,
         ]);
     }
 
@@ -86,9 +86,9 @@ class VibrationDataImport implements ToModel, WithBatchInserts, WithChunkReading
 
     protected function transferTime($time)
     {
-        if(strstr($time,'_')){
+        if (strstr($time, '_')) {
             $_arr = explode('_', $time);
-        }else{
+        } else {
             $_arr = explode('.', $time);
         }
 
@@ -119,11 +119,11 @@ class VibrationDataImport implements ToModel, WithBatchInserts, WithChunkReading
     public function getCsvSettings(): array
     {
         $ext = $this->getExtension();
-        if($ext === 'csv'){
+        if ($ext === 'csv') {
             return [
                 'delimiter' => ","
             ];
-        }else{
+        } else {
             return [
                 'delimiter' => "\t"
             ];
