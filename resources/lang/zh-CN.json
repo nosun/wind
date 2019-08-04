@@ -23,5 +23,13 @@
   "Podu": "坡度",
   "Pogao": "坡高",
   "Dimao": "地貌",
-  "Batch": "批次"
+  "Batch": "批次",
+  "Altitude": "海拔",
+  "Longitude": "经纬度",
+  "Line Type": "导线型号",
+  "Split Number": "分裂数",
+  "Split Span": "分裂间距",
+  "Max Span": "最大次档距",
+  "Insulator Type": "绝缘子类型",
+  "Shock Device": "防震装置"
 }

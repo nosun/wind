@@ -35,24 +35,24 @@ class Analysis extends Form
      */
     public function form()
     {
-        $this->decimal('span', __('Span'))->default(344)
+        $this->decimal('span', __('Span'))->default(0)
             ->rules('required')->help('0 ~ 9999');
-        $this->decimal('line_angle', __('Line Angle'))->default(292.6)
-            ->rules('required')->help('0 ~ 360');;
-        $this->decimal('wind_speed', __('Wind Speed'))->default(26.58)
-            ->rules('required')->help('0 ~ 200');;
-        $this->decimal('wind_direction', __('Wind Direction'))->default(4.54)
-            ->rules('required')->help('0 ~ 360');;
-        $this->decimal('humidity', __('Humidity'))->default(87.55)
-            ->rules('required')->help('0 ~ 100');;
-        $this->decimal('temperature', __('Temperature'))->default(-2.47)
-            ->rules('required')->help('-100 ~ 100');;
-        $this->decimal('precipitation', __('Precipitation'))->default(0.01)
-            ->rules('required')->help('0 ~ 200');;
-        $this->decimal('ice_thickness', __('Ice Thickness'))->default(0.012944)
-            ->rules('required')->help('0 ~ 200');;
-        $this->decimal('angle', __('Angle'))->default(86.02)
-            ->rules('required')->help('0 ~ 360');;
+        $this->decimal('line_angle', __('Line Angle'))->default(0)
+            ->rules('required')->help('0 ~ 360');
+        $this->decimal('wind_speed', __('Wind Speed'))->default(0)
+            ->rules('required')->help('0 ~ 200');
+        $this->decimal('wind_direction', __('Wind Direction'))->default(0)
+            ->rules('required')->help('0 ~ 360');
+        $this->decimal('humidity', __('Humidity'))->default(0)
+            ->rules('required')->help('0 ~ 100');
+        $this->decimal('temperature', __('Temperature'))->default(0)
+            ->rules('required')->help('-100 ~ 100');
+        $this->decimal('precipitation', __('Precipitation'))->default(0)
+            ->rules('required')->help('0 ~ 200');
+        $this->decimal('ice_thickness', __('Ice Thickness'))->default(0)
+            ->rules('required')->help('0 ~ 200');
+        $this->decimal('angle', __('Angle'))->default(0)
+            ->rules('required')->help('0 ~ 360');
     }
 
     /**
