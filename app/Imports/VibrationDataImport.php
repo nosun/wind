@@ -63,6 +63,7 @@ class VibrationDataImport implements ToModel, WithBatchInserts, WithChunkReading
             // new added
             'altitude' => isset($row['altitude']) ? $row['altitude'] : 0,
             'longitude' => isset($row['longitude']) ? $row['longitude'] : 0,
+            'latitude' => isset($row['latitude']) ? $row['latitude'] : 0,
             'line_type' => isset($row['line_type']) ? $row['line_type'] : null,
             'split_number' => isset($row['split_number']) ? $row['split_number'] : 0,
             'split_span' => isset($row['split_span']) ? $row['split_span'] : 0,

@@ -16,6 +16,7 @@ class AddFieldsToVibrationDataTable extends Migration
         Schema::table('vibration_data', function (Blueprint $table) {
             $table->float('altitude')->default(0.0);
             $table->float('longitude')->default(0.0);
+            $table->float('latitude')->default(0.0);
             $table->string('line_type',255)->default('');
             $table->integer('split_number')->default(0);
             $table->integer('split_span')->default(0);
@@ -42,6 +43,7 @@ class AddFieldsToVibrationDataTable extends Migration
         Schema::table('vibration_data', function (Blueprint $table) {
             $table->dropColumn('altitude');
             $table->dropColumn('longitude');
+            $table->dropColumn('latitude');
             $table->dropColumn('line_type');
             $table->dropColumn('split_number');
             $table->dropColumn('split_span');
