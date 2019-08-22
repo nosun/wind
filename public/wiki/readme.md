@@ -50,7 +50,7 @@
 
 ## 四、部署说明
 
-项目采用 php + mysql 开发，适合于各种平台，推荐在 linux 服务器上进行运行，如果是 windows 系统，推荐使用 phpstudy 作为 web 服务的软件环境进行开发
+项目采用 php + mysql 开发，适合于各种平台，推荐在 linux 服务器上进行运行，如果是 windows 系统，可以使用 phpstudy 作为 web 服务的软件环境进行开发
 
 ### 4.1 软件要求：
 
@@ -151,7 +151,16 @@ php artisan tools:batchImport
 php artisan tools:removeData --file=filename
 ```
 
-## 六、其他
+## 六、部署说明
+
+该项目，目前部署于 windows 服务器，使用 phpstudy 作为 web 软件，对 nginx, mysql, php 进行统一的管理。
+
+项目的目录位于 E:/phpstudy/
+
+访问项目，需要先打开 phpstudy 软件，并开启 nginx, mysql 两个服务，然后访问 http://wind.test
+
+
+## 七、其他
 
 - 项目联系人：
 

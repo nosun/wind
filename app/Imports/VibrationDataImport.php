@@ -56,7 +56,6 @@ class VibrationDataImport implements ToModel, WithBatchInserts, WithChunkReading
             'fengzhen' => $row['fengzhen'] ?? 0,
             'tiaozha' => $row['tiaozha'] ?? 0,
             'pohuai' => $row['pohuai'] ?? 0,
-            'key' => $row['unique'],
             'time' => isset($row['time']) ? $this->transferTime($row['time']) : '',
             'batch' => $row['pici'] ?? 0,
 

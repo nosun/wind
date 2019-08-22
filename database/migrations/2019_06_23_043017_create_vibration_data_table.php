@@ -16,7 +16,6 @@ class CreateVibrationDataTable extends Migration
         Schema::create('vibration_data', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('filename');
-            $table->string('key');
             $table->tinyInteger('batch')->default(0);
             $table->string('time')->default('');
             $table->integer('number');
@@ -46,7 +45,6 @@ class CreateVibrationDataTable extends Migration
 
             $table->timestamps();
 
-            $table->index('key');
             $table->index('filename');
             $table->index('batch');
         });
