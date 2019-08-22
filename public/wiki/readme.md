@@ -155,7 +155,7 @@ php artisan tools:removeData --file=filename
 
 该项目，目前部署于 windows 服务器，使用 phpstudy 作为 web 软件，对 nginx, mysql, php 进行统一的管理。
 
-项目的目录位于 E:/phpstudy/
+项目的目录位于 E:/phpstudy_pro/
 
 访问项目，需要先打开 phpstudy 软件，并开启 nginx, mysql 两个服务，然后访问 http://wind.test
 
