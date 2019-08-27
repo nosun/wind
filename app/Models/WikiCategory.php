@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class WikiCategory extends Model
 {
     public $table = 'wiki_categories';
-    protected $fillable = ['name','slug'];
+    protected $fillable = ['definition', 'theory', 'name', 'slug'];
+    protected $guarded = [];
 
-    public function docs(){
-        return $this->hasMany(WikiDoc::class,'category_id','id');
+    public function docs()
+    {
+        return $this->hasMany(WikiDoc::class, 'category_id', 'id');
     }
 }

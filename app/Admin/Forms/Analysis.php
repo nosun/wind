@@ -36,7 +36,7 @@ class Analysis extends Form
     public function form()
     {
         $this->decimal('span', __('Span'))->default(0)
-            ->rules('required')->help('0 ~ 9999');
+            ->rules('required')->help('0 ~ 3000');
         $this->decimal('line_angle', __('Line Angle'))->default(0)
             ->rules('required')->help('0 ~ 360');
         $this->decimal('wind_speed', __('Wind Speed'))->default(0)
@@ -46,13 +46,13 @@ class Analysis extends Form
         $this->decimal('humidity', __('Humidity'))->default(0)
             ->rules('required')->help('0 ~ 100');
         $this->decimal('temperature', __('Temperature'))->default(0)
-            ->rules('required')->help('-100 ~ 100');
+            ->rules('required')->help('-80 ~ 80');
         $this->decimal('precipitation', __('Precipitation'))->default(0)
             ->rules('required')->help('0 ~ 200');
         $this->decimal('ice_thickness', __('Ice Thickness'))->default(0)
             ->rules('required')->help('0 ~ 200');
         $this->decimal('angle', __('Angle'))->default(0)
-            ->rules('required')->help('0 ~ 360');
+            ->rules('required')->help('0 ~ 90');
     }
 
     /**

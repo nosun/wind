@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Wind</b>',
+    'logo' => '<img src="http://wind.test/images/logo.png">',
 
     /*
     |--------------------------------------------------------------------------
@@ -273,7 +273,7 @@ return [
     | "sidebar-mini".
     |
     */
-    'layout' => ['sidebar-mini', 'sidebar-open'],
+    'layout' => ['sidebar-mini', 'sidebar-open','fixed'],
 
     /*
     |--------------------------------------------------------------------------
