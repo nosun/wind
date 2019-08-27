@@ -1,4 +1,11 @@
-<section class="content">
+<style>
+    .chart-content {
+        height:660px;
+        overflow: auto;
+    }
+</style>
+
+<section class="content chart-content">
 @foreach($charts as $key => $value)
     <!-- Main row -->
         <div class="row">
