@@ -68,7 +68,7 @@
             legend: {
                 orient: 'vertical',
                 left: 'left',
-                data: ['微风振动', '风偏', '舞动', '次档距振荡']
+                data: ['舞动', '风偏', '微风振动', '次档距振荡']
             },
             visualMap: {
                 min: 0,
@@ -92,10 +92,10 @@
             },
             series: [
                 {
-                    name: '微风振动',
+                    name: '舞动',
                     type: 'map',
                     mapType: 'china',
-                    roam: false,
+                    roam: true,
                     label: {
                         normal: {
                             show: true
@@ -104,7 +104,7 @@
                             show: true
                         }
                     },
-                    data: data1
+                    data: data3
                 },
                 {
                     name: '风偏',
@@ -122,10 +122,10 @@
                     data: data2
                 },
                 {
-                    name: '舞动',
+                    name: '微风振动',
                     type: 'map',
                     mapType: 'china',
-                    roam: true,
+                    roam: false,
                     label: {
                         normal: {
                             show: true
@@ -134,7 +134,7 @@
                             show: true
                         }
                     },
-                    data: data3
+                    data: data1
                 },
                 {
                     name: '次档距振荡',
