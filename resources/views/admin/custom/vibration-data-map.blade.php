@@ -104,7 +104,7 @@
                             show: true
                         }
                     },
-                    data: data3
+                    data: data1
                 },
                 {
                     name: '风偏',
@@ -134,7 +134,7 @@
                             show: true
                         }
                     },
-                    data: data1
+                    data: data3
                 },
                 {
                     name: '次档距振荡',
