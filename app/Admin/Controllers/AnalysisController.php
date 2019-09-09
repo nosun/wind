@@ -60,7 +60,7 @@ class AnalysisController
             admin_error("Api Error, Please Check");
         }
 
-        return back();
+        return back()->withInput();
     }
 
     protected function camelize($uncamelized_words, $separator = '_')

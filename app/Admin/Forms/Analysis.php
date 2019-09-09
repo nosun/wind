@@ -53,6 +53,10 @@ class Analysis extends Form
             ->rules('required')->help('0 ~ 200');
         $this->decimal('angle', __('Angle'))->default(0)
             ->rules('required')->help('0 ~ 90');
+        $this->decimal('line_split_num', __('Line Split Number'))->default(0)
+            ->rules('required')->help('0 ~ 10');
+        $this->decimal('sub_span', __('Sub Span'))->default(0)
+            ->rules('required')->help('0 ~ 300');
     }
 
     /**

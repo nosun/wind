@@ -40,7 +40,6 @@
             </div>
         </div>
         <!-- /.col -->
-
     </div>
     <!-- /.row -->
 </section>
@@ -65,6 +64,7 @@
             tooltip: {
                 trigger: 'item'
             },
+            color: ['red', 'black', 'darkblue', 'green', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'],
             legend: {
                 orient: 'vertical',
                 left: 'left',
@@ -76,7 +76,8 @@
                 left: 'left',
                 top: 'bottom',
                 text: ['高', '低'],           // 文本，默认为数值文本
-                calculable: true
+                calculable: true,
+//                color: ['#5475f5', '#9feaa5', '#85daef','#74e2ca', '#e6ac53', '#9fb5ea']
             },
             toolbox: {
                 show: true,
@@ -98,10 +99,10 @@
                     roam: true,
                     label: {
                         normal: {
-                            show: true
+                            show: true,
                         },
                         emphasis: {
-                            show: true
+                            show: true,
                         }
                     },
                     data: data1
@@ -116,7 +117,7 @@
                             show: true
                         },
                         emphasis: {
-                            show: true
+                            show: true,
                         }
                     },
                     data: data2

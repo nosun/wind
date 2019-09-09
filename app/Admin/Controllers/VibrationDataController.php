@@ -76,6 +76,8 @@ class VibrationDataController extends AdminController
         $grid->column('pohuai', __('Pohuai'));
         $grid->column('fengzhen', __('Fengzhen'));
         $grid->column('batch', __('Batch'));
+//        $grid->column('line_split_num', __('Line Split Number'));
+//        $grid->column('sub_span', __('Sub Span'));
 
         $grid->filter(function ($filter) {
             // 去掉默认的id过滤器

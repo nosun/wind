@@ -20,7 +20,7 @@
                     <div class="box-body no-padding">
                         <div class="row">
                             <div class="col-md-9 col-sm-8">
-                                <div id="main1" style="width: 800px;">
+                                <div id="main1" style="width: 1100px;">
                                     @if(is_array($value))
                                         @foreach($value as $item)
                                             @include('admin.custom.parts.chart-show')

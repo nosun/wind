@@ -31,5 +31,7 @@
   "Split Span": "分裂间距",
   "Max Span": "最大次档距",
   "Insulator Type": "绝缘子类型",
-  "Shock Device": "防震装置"
+  "Shock Device": "防震装置",
+  "Line Split Number": "导线分裂数",
+  "Sub Span":"次档距"
 }
