@@ -105,9 +105,9 @@ class VibrationDataController extends AdminController
 
             $filter->column(1 / 3, function ($filter) {
                 $provinces = config('app.provinces');
-                $province_options = (function ($provinces){
+                $province_options = (function ($provinces) {
                     $options = [];
-                    foreach($provinces as $province){
+                    foreach ($provinces as $province) {
                         $options[$province] = $province;
                     }
                     return $options;
@@ -167,7 +167,7 @@ class VibrationDataController extends AdminController
 //            return new Box('性别比例', $doughnut);
 //        });
 
-        $grid->tools(function ($tools){
+        $grid->tools(function ($tools) {
             $tools->append('<div class="btn-group pull-right" style="margin-right: 5px">
                 <a href="' . route("admin.vibrationData.importForm") . '" class="btn btn-sm btn-primary">
                     <i class="fa fa-database"></i><span class="hidden-xs"> 批量导入 </span>
