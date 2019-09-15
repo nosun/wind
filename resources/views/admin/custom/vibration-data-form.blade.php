@@ -10,10 +10,8 @@
             <div class="box-body">
                 <ol>
                     <li> 上传的文档需要是 Csv 文档，CSV 文件第一行为数据标题。</li>
-                    <li> 上传的文档有两种类型，一种是客户的属性更新，一种是邀约记录添加,具体格式如下，请严格按照格式进行填写数据。</li>
-                    <li>上传之前，请务必对数据的格式进行检查，保证数据格式的准确性，以避免上传过程中出错。</li>
-                    <li> 邀约记录样例表格：<a href="/demo_sheets/data_usage_log.csv" target="_blank">下载</a></li>
-                    <li> 客户属性样例表格：<a href="/demo_sheets/customer_update_attr.csv" target="_blank">下载</a></li>
+                    <li> 上传之前，请务必对数据的格式进行检查，保证数据格式的准确性，以避免上传过程中出错。</li>
+                    <li> 样例表格：<a href="/demo_sheets/wind_demo.csv" target="_blank">下载</a></li>
                 </ol>
             </div>
             <!-- /.box-body -->
@@ -86,6 +84,7 @@
             log_area.html('');
         }
     };
+
     adminJs.common = {
         ajaxSetup: function () {
             $.ajaxSetup({
@@ -103,7 +102,7 @@
         var fd = new FormData($fileForm[0]);
 
         var request = $.ajax({
-            url: '/admin/dataUsageLog/batchImport',
+            url: '/importData',
             type: 'POST',
             cache: false,
             data: fd,

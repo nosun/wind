@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Imports\VibrationDataImport;
 use App\Models\VibrationData;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -11,10 +12,16 @@ use Encore\Admin\Layout\Content;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Encore\Admin\Widgets\Box;
+use App\Http\Controllers\Traits\ApiResponse;
+use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Validators\ValidationException;
 use View;
 
 class VibrationDataController extends AdminController
 {
+
+    use ApiResponse;
+
     /**
      * Title for current resource.
      *
@@ -160,9 +167,12 @@ class VibrationDataController extends AdminController
 //            return new Box('性别比例', $doughnut);
 //        });
 
-//        $grid->tools(function ($tools){
-//            $tools->add
-//        });
+        $grid->tools(function ($tools){
+            $tools->append('<div class="btn-group pull-right" style="margin-right: 5px">
+                <a href="' . route("admin.vibrationData.importForm") . '" class="btn btn-sm btn-primary">
+                    <i class="fa fa-database"></i><span class="hidden-xs"> 批量导入 </span>
+                </a></div>');
+        });
 
         return $grid;
     }
@@ -306,6 +316,75 @@ class VibrationDataController extends AdminController
                 ['text' => '风振数据', 'url' => route('admin.vibrationData.index')],
                 ['text' => '批量上传']
             )->view('admin::custom.vibration-data-form', []);
+    }
+
+
+    public function import(Request $request)
+    {
+
+        $file = $request->file('file');
+
+        if (empty($file)) {
+            return $this->status('fail', ['message' => 'file empty'], 601);
+        }
+
+        $ext = strtolower($file->getClientOriginalExtension());
+
+        $validator = \Validator::make(
+            [
+                'file' => $file,
+                'extension' => $ext,
+            ],
+            [
+                'file' => 'required',
+                'extension' => [Rule::in('csv')],
+            ]
+        );
+
+        if ($validator->fails()) {
+            return $this->status('fail', ['message' => 'file format error'], 601);
+        }
+
+        $path = date('Ymd', time());
+
+        $file = $request->file('file');
+
+        $filename = $file->getClientOriginalName();
+
+        $filepath = \Storage::putFileAs($path, $file, $filename);
+
+        $result = $this->importDataSheet($filename, $filepath);
+
+        if ($result['failed'] > 0) {
+            $this->status('failed', $result, 602);
+        }
+
+        $result['finished'] = 1;
+
+        return $this->success($result);
+    }
+
+    protected function importDataSheet($filename, $filepath)
+    {
+        $result = [
+            'failed' => 0,
+        ];
+
+        try {
+            \Excel::import(new VibrationDataImport($filename), $filepath);
+        } catch (ValidationException $e) {
+            $failures = $e->failures();
+            foreach ($failures as $failure) {
+//                        $failure->row(); // row that went wrong
+//                        $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $result['errors'] = $e->errors();
+//                        $failure->values(); // The values of the row that has failed.
+            }
+
+            $result['failed'] = count($failures);
+        }
+
+        return $result;
     }
 
     protected function getMiniMonth()

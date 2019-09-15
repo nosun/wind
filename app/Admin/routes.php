@@ -17,7 +17,7 @@ Route::group([
     $router->resource('vibrationData', 'VibrationDataController')->names('admin.vibrationData');
     $router->resource('chartsCategory', 'ChartsCategoryController')->names('admin.chartsCategory');
     $router->get('importData','VibrationDataController@importForm')->name('admin.vibrationData.importForm');
-//    $router->post('importData','VibrationDataController@import')->name('admin.vibrationData.import');
+    $router->post('importData','VibrationDataController@import')->name('admin.vibrationData.import');
     $router->get('dataMap','VibrationDataController@showMap')->name('admin.vibrationData.showMap');
     $router->get('mapDemo','VibrationDataController@showMapDemo');
     $router->get('smartAnalysis','AnalysisController@showForm')->name('admin.analysis.form');
