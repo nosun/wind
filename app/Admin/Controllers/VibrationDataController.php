@@ -359,8 +359,6 @@ class VibrationDataController extends AdminController
             $this->status('failed', $result, 602);
         }
 
-        $result['finished'] = 1;
-
         return $this->success($result);
     }
 
