@@ -30,7 +30,7 @@
                 <div class="box-body no-padding">
                     <div class="row">
                         <div class="col-md-9 col-sm-8">
-                            <div id="main" style="width: 800px;height:600px;"></div>
+                            <div id="main" style="width: 1000px;height:600px;"></div>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -46,7 +46,7 @@
 
 <link rel="stylesheet" href="/vendor/laravel-admin/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css">
 <script src="/js/echarts.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="/js/moment.min.js"></script>
 <script src="/vendor/laravel-admin/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
 <script>
     $('#date_range').daterangepicker();

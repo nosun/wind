@@ -38,6 +38,9 @@ class WikiCategoryController extends AdminController
             $actions->disableDelete();
         });
 
+        $grid->disableColumnSelector();
+        $grid->disableExport();
+
         return $grid;
     }
 

@@ -15,3 +15,5 @@ Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
     $navbar->left(view('admin.top-title'));
 
 });
+
+Admin::css('/css/app.css');

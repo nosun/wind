@@ -118,7 +118,7 @@
 </section>
 <link rel="stylesheet" href="/vendor/laravel-admin/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css">
 <script src="/js/echarts.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="/js/moment.min.js"></script>
 <script src="/vendor/laravel-admin/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
 <script>
     $('#date_range').daterangepicker();
