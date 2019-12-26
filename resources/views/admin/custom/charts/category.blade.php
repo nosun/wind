@@ -1,6 +1,6 @@
 <style>
     .chart-content {
-        height:700px;
+        height:850px;
         overflow: auto;
     }
 </style>
