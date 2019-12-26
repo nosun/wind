@@ -1,6 +1,6 @@
 <style>
     .chart-content {
-        height:660px;
+        height:700px;
         overflow: auto;
     }
 </style>
@@ -19,8 +19,8 @@
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
                         <div class="row">
-                            <div class="col-md-9 col-sm-8">
-                                <div id="main1" style="width: 1100px;">
+                            <div class="col-md-12 col-sm-8">
+                                <div id="main1">
                                     @if(is_array($value))
                                         @foreach($value as $item)
                                             @include('admin.custom.parts.chart-show')
