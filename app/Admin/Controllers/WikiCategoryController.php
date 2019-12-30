@@ -9,6 +9,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Security;
 
 class WikiCategoryController extends AdminController
 {
@@ -117,6 +118,13 @@ class WikiCategoryController extends AdminController
         $form->text('name', __('Name'));
         $form->UEditor('definition', __('Definition'));
         $form->UEditor('theory', __('Theory'));
+
+        $form->saving(function (Form $form){
+
+            $form->definition = Security::clean($form->definition);
+            $form->theory = Security::clean($form->theory);
+        });
+
         return $form;
     }
 }
