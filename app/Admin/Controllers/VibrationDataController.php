@@ -394,18 +394,22 @@ class VibrationDataController extends AdminController
 
     protected function getFengZhenData($level, $start, $end)
     {
-        $query = VibrationData::query()->whereIn('batch', [2, 3]);
+        $key = md5($level . $start . $end);
+        return \Cache::remember($key, 3600, function () use ($level, $start, $end) {
+            $query = VibrationData::query()->whereIn('batch', [2, 3]);
 
-        if ($start) {
-            $query = $query->where('time', '>', $start);
-        }
+            if ($start) {
+                $query = $query->where('time', '>', $start);
+            }
 
-        if ($end) {
-            $query = $query->where('time', '<', $end);
-        }
+            if ($end) {
+                $query = $query->where('time', '<', $end);
+            }
 
-        return $query->where('fengzhen', $level)
-            ->groupBy('province')
-            ->selectRaw("province as name,count(id) as value")->get()->toJson();
+            return $query->where('fengzhen', $level)
+                ->groupBy('province')
+                ->selectRaw("province as name,count(id) as value")->get()->toJson();
+        });
+
     }
 }
